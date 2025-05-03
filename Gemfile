@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Specify Nokogiri platform for WSL/Ubuntu
-gem "nokogiri", "~> 1.18.7", platforms: [:ruby]
+gem "nokogiri", "~> 1.18.7", platforms: [ :ruby ]
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ], require: "debug/prelude"
@@ -49,4 +49,3 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
-
