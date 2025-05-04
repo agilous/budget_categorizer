@@ -14,6 +14,7 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw x64_mingw jruby ]
 
 group :development, :test do
+  gem "brakeman"
   gem "debug", platforms: %i[ mri mingw x64_mingw ], require: "debug/prelude"
   gem "factory_bot_rails"
   gem "rspec-rails"
