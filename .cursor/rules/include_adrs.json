@@ -1,0 +1,34 @@
+{
+  "name": "Include Related ADRs",
+  "description": "Automatically adds all related Architecture Decision Records (ADRs) to prompt context",
+  "run": {
+    "when": {
+      "or": [
+        {
+          "filePattern": ".*(adr|architecture|decision).*\\.md"
+        },
+        {
+          "promptContains": {
+            "all": [
+              {
+                "any": ["add", "code", "create", "develop", "write"]
+              },
+              {
+                "any": ["feature", "functionality", "method"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "do": {
+      "fetchFiles": {
+        "pattern": "docs/adr/*.md",
+        "excludeCurrentFile": true,
+        "maxFiles": 5,
+        "section": "Related ADRs"
+      },
+      "addToContext": true
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "name": "Rails Best Practices with Hotwire",
+  "rules": {
+    "rails_architecture": {
+      "directory_structure": {
+        "models": "app/models",
+        "views": "app/views",
+        "controllers": "app/controllers",
+        "helpers": "app/helpers",
+        "mailers": "app/mailers",
+        "jobs": "app/jobs",
+        "services": "app/services",
+        "concerns": "app/concerns",
+        "components": "app/components",
+        "javascript": "app/javascript",
+        "stylesheets": "app/assets/stylesheets",
+        "images": "app/assets/images"
+      },
+      "naming_conventions": {
+        "models": "singular, CamelCase",
+        "controllers": "plural, CamelCaseController",
+        "views": "controller_name/action_name.html.erb",
+        "partials": "_partial_name.html.erb",
+        "helpers": "HelperNameHelper",
+        "concerns": "Concern behavior name"
+      }
+    },
+    "model_best_practices": {
+      "fat_model_thin_controller": true,
+      "validations": "validate data integrity at model level",
+      "callbacks": "use sparingly, prefer service objects for complex logic",
+      "scopes": "prefer class methods for complex queries",
+      "concerns": "extract reusable behavior into concerns",
+      "relationships": "define associations with appropriate options",
+      "single_responsibility": "extract complex logic to service objects"
+    },
+    "controller_best_practices": {
+      "restful_actions": ["index", "show", "new", "create", "edit", "update", "destroy"],
+      "slim_controllers": "delegate complex logic to service objects",
+      "before_actions": "use for authentication, authorization, setting up resources",
+      "strong_parameters": "always use for mass assignment protection",
+      "respond_to": "specify format responses (HTML, JSON, Turbo Streams)"
+    },
+    "view_best_practices": {
+      "partials": "extract reusable UI components into partials",
+      "helpers": "use for view-specific logic",
+      "presenters": "use for complex view logic",
+      "view_components": "use for reusable UI components with behavior",
+      "html_structure": "use semantic HTML elements",
+      "form_handling": "use form_with for all forms"
+    },
+    "hotwire": {
+      "turbo": {
+        "turbo_frames": {
+          "definition": "<turbo-frame id=\"{frame_id}\">{content}</turbo-frame>",
+          "target": "data-turbo-frame=\"{target_frame_id}\"",
+          "lazy_loading": "loading=\"lazy\" src=\"{path}\"",
+          "drive_attributes": {
+            "disable": "data-turbo=\"false\"",
+            "method": "data-turbo-method=\"{http_method}\"",
+            "confirm": "data-turbo-confirm=\"{message}\"",
+            "stream": "data-turbo-stream=\"{true|false}\""
+          }
+        },
+        "turbo_streams": {
+          "definition": "<turbo-stream action=\"{action}\" target=\"{dom_id}\">...</turbo-stream>",
+          "actions": ["append", "prepend", "replace", "update", "remove", "before", "after"],
+          "format": "format: :turbo_stream",
+          "response": "respond_to do |format|\n  format.turbo_stream\nend"
+        },
+        "broadcasts": {
+          "after_create": "broadcast_append_to \"stream\"",
+          "after_update": "broadcast_replace_to \"stream\"",
+          "after_destroy": "broadcast_remove_to \"stream\"",
+          "manual": "Turbo::StreamsChannel.broadcast_append_to \"stream\", target: \"{dom_id}\", partial: \"{partial_path}\", locals: { resource: resource }"
+        },
+        "turbo_drive": {
+          "progress_bar": "Turbo.setProgressBarDelay(100)",
+          "visit": "Turbo.visit(url, { action: \"replace\" })"
+        }
+      },
+      "stimulus": {
+        "controller_definition": "class {Name}Controller extends Controller {",
+        "targets": "static targets = [\"{element_name}\"]",
+        "values": "static values = { {name}: {type} }",
+        "classes": "static classes = [\"{class_name}\"]",
+        "html_binding": {
+          "controller": "data-controller=\"{controller_name}\"",
+          "action": "data-action=\"{event}->{controller}#{method}\"",
+          "target": "data-{controller}-target=\"{target_name}\"",
+          "value": "data-{controller}-{value-name}-value=\"{value}\"",
+          "class": "data-{controller}-{class-name}-class=\"{class}\""
+        },
+        "lifecycle_callbacks": ["initialize", "connect", "disconnect"],
+        "organization": "app/javascript/controllers/{name}_controller.js"
+      },
+      "turbo_and_stimulus_integration": {
+        "frames_with_controllers": "data-controller=\"{controller}\" data-{controller}-url-value=\"{dynamic_path}\"",
+        "streaming_with_stimulus": "broadcast_append_to \"stream\", target: \"items\", partial: \"item\", locals: { item: @item }"
+      }
+    },
+    "database_best_practices": {
+      "indexes": "add indexes to foreign keys and frequently queried columns",
+      "migrations": "small, focused, reversible migrations",
+      "database_constraints": "use database constraints for data integrity",
+      "transactions": "wrap related operations in transactions",
+      "optimistic_locking": "use lock_version for concurrent edits"
+    },
+    "performance_best_practices": {
+      "n_plus_one_queries": "use includes, eager_load, or preload to avoid N+1 queries",
+      "bullet_gem": "use to detect N+1 queries",
+      "caching": {
+        "fragment_caching": "<% cache [resource, 'v1'] do %>....<% end %>",
+        "russian_doll_caching": "nested cache blocks for complex views",
+        "low_level_caching": "Rails.cache.fetch(\"key\", expires_in: 12.hours) { ... }"
+      },
+      "background_jobs": "use Sidekiq/ActiveJob for time-consuming tasks",
+      "lazy_loading_turbo_frames": "loading=\"lazy\" src=\"/resource_path\""
+    },
+    "security_best_practices": {
+      "csrf_protection": "always enabled by default",
+      "strong_parameters": "required for mass assignment protection",
+      "sql_injection": "use bound parameters or scopes for all queries",
+      "xss_protection": "use html_safe only when absolutely necessary",
+      "authentication": "use a mature solution like Devise or secure roll-your-own",
+      "authorization": "use Pundit or CanCanCan for role-based access control"
+    },
+    "testing_best_practices": {
+      "model_tests": "test validations, scopes, methods",
+      "controller_tests": "test HTTP responses and session manipulation",
+      "system_tests": "test user workflows with Capybara",
+      "turbo_testing": "test frame and stream behaviors",
+      "stimulus_testing": "test controller behavior with Jasmine/Jest"
+    },
+    "deployment_best_practices": {
+      "environment_variables": "use for configuration",
+      "credentials": "use Rails credentials for secrets",
+      "capistrano": "use for deployment automation",
+      "monitoring": "use AppSignal, New Relic, or Scout",
+      "error_tracking": "use Sentry, Rollbar, or Bugsnag"
+    },
+    "code_quality": {
+      "rubocop": "use for style enforcement",
+      "brakeman": "use for security scanning",
+      "simplecov": "use for test coverage",
+      "standard.js": "use for JavaScript style enforcement"
+    }
+  }
+}

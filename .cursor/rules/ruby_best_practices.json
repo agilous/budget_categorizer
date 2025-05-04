@@ -1,0 +1,135 @@
+{
+  "name": "Ruby Best Practices for Rails Development",
+  "rules": {
+    "code_style": {
+      "naming_conventions": {
+        "snake_case": "variables, methods, symbols, files, directories",
+        "camel_case": "classes, modules",
+        "screaming_snake_case": "constants"
+      },
+      "spacing": {
+        "indentation": "2 spaces, no tabs",
+        "line_length": "max 80-120 characters",
+        "empty_lines": "use to separate logical sections"
+      },
+      "method_length": "aim for under 10 lines",
+      "comment_style": {
+        "documentation": "# Documentation comment above method/class",
+        "inline": "# Inline comment explaining complex logic",
+        "todo": "# TODO: explanation for future work"
+      }
+    },
+    "ruby_idioms": {
+      "method_chaining": "user.posts.active.order(created_at: :desc)",
+      "implicit_returns": "last expression is automatically returned",
+      "blocks_over_procs": "prefer blocks for readability",
+      "each_over_for": "prefer each over traditional for loops",
+      "map_select_reject": "use over manual iteration for collections",
+      "tap_method": "object.tap { |o| o.attribute = value }",
+      "safe_navigation": "user&.profile&.avatar",
+      "symbol_keys": "prefer { symbol: value } over { 'string' => value }",
+      "string_interpolation": "\"Hello #{user.name}\"",
+      "conditional_assignment": "variable ||= default_value"
+    },
+    "ruby_gotchas": {
+      "mutable_default_params": "avoid [] and {} as default parameters",
+      "self_vs_instance_vars": "be consistent with self.method vs @variable usage",
+      "bang_methods": "use ! methods with caution (e.g., save!)",
+      "monkey_patching": "avoid unless absolutely necessary"
+    },
+    "class_design": {
+      "single_responsibility": "classes should do one thing well",
+      "composition_over_inheritance": "prefer module inclusion over deep inheritance",
+      "dependency_injection": "pass dependencies as parameters",
+      "private_methods": "use for internal implementation details",
+      "protected_methods": "use sparingly, only when subclasses need access"
+    },
+    "modules_and_concerns": {
+      "concerns": "extract cross-cutting behavior into concerns",
+      "namespacing": "use modules to organize related classes",
+      "mixins": "use for shared behavior across unrelated classes",
+      "module_structure": "include instance methods, extend class methods"
+    },
+    "metaprogramming": {
+      "when_to_use": "only when it provides significant clarity/DRYness",
+      "dynamic_methods": "method_missing, define_method, const_missing",
+      "class_eval": "avoid unless necessary",
+      "instance_eval": "use cautiously for DSLs"
+    },
+    "memory_management": {
+      "object_lifecycle": "be aware of object creation and garbage collection",
+      "large_collection_processing": "use find_each for batching ActiveRecord",
+      "temporary_objects": "minimize creation in tight loops"
+    },
+    "error_handling": {
+      "specific_rescues": "rescue specific exceptions, not Exception",
+      "ensure_blocks": "use for cleanup regardless of exceptions",
+      "custom_exceptions": "create for domain-specific errors",
+      "fail_fast": "raise errors early to avoid cascading issues"
+    },
+    "rails_specific_ruby": {
+      "activerecord_queries": {
+        "scopes": "use for reusable queries",
+        "joins_vs_includes": "understand the difference for performance",
+        "find_vs_where": "use appropriately based on needs",
+        "pluck": "use to retrieve specific columns only",
+        "exists": "use for checking existence without loading objects"
+      },
+      "activesupport_extensions": {
+        "date_helpers": "2.days.ago, 1.month.from_now",
+        "string_helpers": "humanize, titleize, parameterize",
+        "array_helpers": "in_groups_of, split, to_sentence",
+        "hash_helpers": "reverse_merge, deep_symbolize_keys",
+        "enumerable_helpers": "many?, none?, one?"
+      },
+      "delegations": {
+        "delegate_method": "delegate :method, to: :association",
+        "delegate_many": "delegate :method1, :method2, to: :association, prefix: true"
+      },
+      "view_helpers": "create custom helpers for view logic"
+    },
+    "concurrency": {
+      "thread_safety": "be aware of thread-safe vs thread-unsafe code",
+      "race_conditions": "use transactions/locks to prevent race conditions",
+      "global_state": "avoid mutable global state"
+    },
+    "performance": {
+      "lazy_evaluation": "use to defer expensive operations",
+      "caching_results": "memoize expensive computations",
+      "n_plus_one": "avoid with includes, eager_load, or preload",
+      "bulk_operations": "use update_all, delete_all for batch operations",
+      "ruby_profiling": "use rack-mini-profiler, ruby-prof for finding hotspots"
+    },
+    "testing_ruby": {
+      "unit_tests": "test methods in isolation",
+      "mocks_stubs": "use for isolating code units",
+      "fixtures_factories": "use factories for test data",
+      "coverage": "aim for high test coverage of business logic"
+    },
+    "code_organization": {
+      "dry_principle": "don't repeat yourself, extract common code",
+      "srp_principle": "single responsibility principle",
+      "tell_dont_ask": "tell objects what to do, don't ask for their state",
+      "law_of_demeter": "limit knowledge of other objects' structure"
+    },
+    "gems_and_dependencies": {
+      "minimal_dependencies": "only use gems when necessary",
+      "version_locking": "lock gem versions for stability",
+      "gem_alternatives": "consider built-in Ruby/Rails alternatives first"
+    },
+    "rails_ecosystem_ruby": {
+      "service_objects": "app/services/user_authentication_service.rb",
+      "query_objects": "app/queries/users_with_recent_posts_query.rb",
+      "form_objects": "app/forms/registration_form.rb",
+      "value_objects": "app/values/money.rb",
+      "policy_objects": "app/policies/article_policy.rb",
+      "decorators": "app/decorators/user_decorator.rb"
+    },
+    "refactoring_patterns": {
+      "extract_method": "break long methods into smaller ones",
+      "extract_class": "break large classes into focused ones",
+      "replace_conditional_with_polymorphism": "use inheritance over complex if/else",
+      "introduce_parameter_object": "group related parameters into an object"
+    }
+  }
+}

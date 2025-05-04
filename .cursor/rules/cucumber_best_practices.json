@@ -1,0 +1,91 @@
+{
+  "name": "Cucumber Rails Best Practices",
+  "rules": {
+    "directory_structure": {
+      "feature_files": "features",
+      "step_definitions": "features/step_definitions",
+      "support_files": "features/support",
+      "env_file": "features/support/env.rb",
+      "page_objects": "features/support/pages",
+      "helpers": "features/support/helpers",
+      "factories": "features/factories"
+    },
+    "file_naming": {
+      "feature_file": "{feature_name}.feature",
+      "step_definition": "{feature_name}_steps.rb",
+      "page_object": "{page_name}_page.rb",
+      "helper": "{helper_name}_helper.rb"
+    },
+    "feature_structure": {
+      "feature": "Feature: {Feature description}",
+      "background": "Background:\n  Given {preconditions}",
+      "scenario": "Scenario: {Scenario description}",
+      "scenario_outline": "Scenario Outline: {Scenario description with placeholders}",
+      "examples": "Examples:\n  | {header1} | {header2} |\n  | {value1}  | {value2}  |"
+    },
+    "step_patterns": {
+      "given": "Given /^{regular expression}$/ do |{parameters}|",
+      "when": "When /^{regular expression}$/ do |{parameters}|",
+      "then": "Then /^{regular expression}$/ do |{parameters}|",
+      "and": "And /^{regular expression}$/ do |{parameters}|",
+      "but": "But /^{regular expression}$/ do |{parameters}|"
+    },
+    "gherkin_syntax": {
+      "comments": "# This is a comment",
+      "doc_strings": "\"\"\"multiline text\"\"\"",
+      "data_tables": "| {column1} | {column2} |\n| {value1}  | {value2}  |",
+      "tags": "@{tag_name}"
+    },
+    "common_tags": {
+      "wip": "@wip",
+      "skip": "@skip",
+      "javascript": "@javascript",
+      "focus": "@focus",
+      "smoke": "@smoke"
+    },
+    "hooks": {
+      "before": "Before do\n  {setup_code}\nend",
+      "after": "After do\n  {teardown_code}\nend",
+      "tagged_hooks": "Before('@{tag}') do\n  {tag_specific_setup}\nend",
+      "around": "Around do |scenario, block|\n  {before_code}\n  block.call\n  {after_code}\nend"
+    },
+    "page_objects": {
+      "class_definition": "class {PageName}Page < SitePrism::Page",
+      "elements": "element :{element_name}, '{css_selector}'",
+      "sections": "section :{section_name}, {SectionClass}, '{css_selector}'"
+    },
+    "world_modules": {
+      "include": "World({ModuleName})",
+      "define": "module {ModuleName}\n  def {helper_method}\n    {implementation}\n  end\nend"
+    },
+    "step_transforms": {
+      "capture_numeric": "Transform /^(\\d+)$/ do |number|\n  number.to_i\nend",
+      "capture_date": "Transform /^(\\d{4}-\\d{2}-\\d{2})$/ do |date_string|\n  Date.parse(date_string)\nend"
+    },
+    "integration": {
+      "factory_bot": "include FactoryBot::Syntax::Methods",
+      "database_cleaner": "DatabaseCleaner.strategy = :transaction",
+      "capybara": "Capybara.default_driver = :rack_test",
+      "selenium": "Capybara.javascript_driver = :selenium_chrome_headless"
+    },
+    "parameterization": {
+      "environment_variables": "ENV['BROWSER'] ||= 'chrome'",
+      "cucumber_yml": "default: --format pretty --tags 'not @wip'",
+      "profiles": "cucumber.yml: profiles:\n  firefox: BROWSER=firefox --format html --out reports/firefox.html\n  chrome: BROWSER=chrome --format html --out reports/chrome.html"
+    },
+    "best_practices": [
+      "Use declarative rather than imperative style in scenarios",
+      "Focus on business value in feature descriptions",
+      "Keep scenarios short and focused on a single outcome",
+      "Avoid technical details in feature files",
+      "Use SitePrism page objects for UI interaction",
+      "Reuse step definitions across features",
+      "Use scenario outlines for data-driven tests",
+      "Organize tags hierarchically",
+      "Maintain a clean, isolated test database",
+      "Use Domain Specific Language in step definitions",
+      "Write scenarios from the user's perspective",
+      "Balance between high-level and detailed steps"
+    ]
+  }
+}

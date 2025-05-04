@@ -1,0 +1,104 @@
+{
+  "name": "RSpec Rails Best Practices",
+  "rules": {
+    "directory_structure": {
+      "model_specs": "spec/models",
+      "controller_specs": "spec/controllers",
+      "request_specs": "spec/requests",
+      "system_specs": "spec/system",
+      "feature_specs": "spec/features",
+      "helper_specs": "spec/helpers",
+      "mailer_specs": "spec/mailers",
+      "routing_specs": "spec/routing",
+      "view_specs": "spec/views",
+      "shared_examples": "spec/support/shared_examples",
+      "factories": "spec/factories",
+      "support_files": "spec/support"
+    },
+    "file_naming": {
+      "model_spec": "{model_name}_spec.rb",
+      "controller_spec": "{controller_name}_controller_spec.rb",
+      "request_spec": "{resource_name}_spec.rb",
+      "system_spec": "{feature_name}_spec.rb"
+    },
+    "describe_blocks": {
+      "model": "describe {ModelName}, type: :model do",
+      "controller": "describe {ControllerName}Controller, type: :controller do",
+      "request": "describe '{HTTP method} /{path}', type: :request do",
+      "feature": "describe '{Feature description}', type: :system do"
+    },
+    "context_blocks": {
+      "grouping": "context 'when {condition}' do",
+      "validation": "context 'validations' do",
+      "associations": "context 'associations' do",
+      "scopes": "context 'scopes' do",
+      "methods": "context '#{method_name}' do"
+    },
+    "it_blocks": {
+      "behavior": "it '{expected behavior}' do",
+      "validation": "it { should validate_presence_of(:attribute) }",
+      "association": "it { should belong_to(:related_model) }",
+      "state": "it 'has initial state of {state}' do"
+    },
+    "expectations": {
+      "equality": "expect(actual).to eq(expected)",
+      "truthy": "expect(actual).to be_truthy",
+      "falsey": "expect(actual).to be_falsey",
+      "nil": "expect(actual).to be_nil",
+      "raised_error": "expect { action }.to raise_error(ErrorClass)",
+      "change": "expect { action }.to change { object.attribute }.from(before).to(after)"
+    },
+    "let_vs_before": {
+      "use_let_for": [
+        "Object initialization",
+        "Values that depend on other let definitions",
+        "Objects referenced in multiple examples"
+      ],
+      "use_before_for": [
+        "Side effects",
+        "Database setup",
+        "Complex initialization logic"
+      ]
+    },
+    "mocking_and_stubbing": {
+      "double": "allow(object).to receive(:method).and_return(value)",
+      "mock": "expect(object).to receive(:method).with(args).and_return(value)",
+      "any_instance": "allow_any_instance_of(Class).to receive(:method).and_return(value)"
+    },
+    "factories": {
+      "define": "factory :{model_name} do\n  {attributes}\nend",
+      "traits": "trait :{trait_name} do\n  {trait_specific_attributes}\nend",
+      "sequences": "sequence :{sequence_name} do |n|\n  \"{prefix}#{n}\"\nend"
+    },
+    "shared_examples": {
+      "define": "RSpec.shared_examples '{behavior description}' do\n  {examples}\nend",
+      "include": "it_behaves_like '{behavior description}'"
+    },
+    "subject": {
+      "explicit": "subject { described_class.new(params) }",
+      "named": "subject(:instance_name) { described_class.new(params) }"
+    },
+    "metadata": {
+      "focus": "fit 'description' do",
+      "skip": "xit 'description' do",
+      "pending": "pending 'description' do"
+    },
+    "rails_specific": {
+      "routes": "it { should route_to(controller: 'controller', action: 'action') }",
+      "params": "it { should permit(:param1, :param2).for(:action) }",
+      "database_cleaner": "config.use_transactional_fixtures = false"
+    },
+    "best_practices": [
+      "Use one expectation per test when possible",
+      "Prefer let over instance variables",
+      "Use factories over fixtures",
+      "Use shared examples for common behaviors",
+      "Use the most specific matcher available",
+      "Follow the Arrange-Act-Assert pattern",
+      "Keep tests independent of each other",
+      "Test public interfaces, not implementation details",
+      "Prefer request specs over controller specs",
+      "Use system specs for UI workflows"
+    ]
+  }
+}
