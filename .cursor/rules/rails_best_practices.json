@@ -128,9 +128,10 @@
     "testing_best_practices": {
       "model_tests": "test validations, scopes, methods",
       "controller_tests": "test HTTP responses and session manipulation",
-      "system_tests": "test user workflows with Capybara",
+      "system_tests": false,
       "turbo_testing": "test frame and stream behaviors",
-      "stimulus_testing": "test controller behavior with Jasmine/Jest"
+      "stimulus_testing": "test controller behavior with Jasmine/Jest",
+      "view_specs": false
     },
     "deployment_best_practices": {
       "environment_variables": "use for configuration",
