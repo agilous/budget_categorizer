@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "bootsnap", require: false
 gem "importmap-rails"
 gem "jbuilder"
-gem "nokogiri", "~> 1.18.7", platforms: [ :ruby ]
+gem "nokogiri", "~> 1.18.10", platforms: [ :ruby ]
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"
