@@ -9,7 +9,7 @@ gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "tailwindcss-rails", "~> 3.0"
+gem "tailwindcss-rails", "~> 4.4"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ mingw x64_mingw jruby ]
 
